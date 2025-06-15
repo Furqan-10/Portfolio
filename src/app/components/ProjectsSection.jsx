@@ -19,22 +19,22 @@ const projectsData = [
     id: 2,
     title: "Custom DNS Server",
     description: "A Python-based DNS server using dnslib, socket, and UDPServer to block specified domains by returning fake IP responses.",
-    tools: ["Python", "dnslib ", "Socket", "UDPserver"],
+    tools: ["Python", "dnslib", "Socket", "UDPserver"],
     tag: ["All", "Web","Networking"],
     gitUrl: "https://github.com/Furqan-10/CustomDNS",
   },
   {
     id: 3,
-    title: "AI-Based Face Mask Detection System",
-    description: "A real-time face mask recognition system using a fine-tuned MobileNetV2 model and OpenCV Haar Cascade, achieving 99.19% accuracy with robust data augmentation for varied conditions.",
+    title: "AI-Based Face Mask Detection",
+    description: "A real-time face mask recognition system using a fine-tuned MobileNetV2 model and OpenCV Haar Cascade, achieving 99.19% accuracy.",
     tools: ["Python", "MobileNetV2", "OpenCV","CNN","Haar Cascade","Transfer Learning"],
     tag: ["All", "AI"],
     gitUrl: "https://github.com/Furqan-10/AI-Face-Mask-Detection",
   },
   {
     id: 4,
-    title: "KarweDB – Custom NoSQL Database System",
-    description: "A non-relational DBMS storing data in JSON-like documents with SQL-style querying, blending the flexibility of schemaless design with the familiarity of relational syntax.",
+    title: "KarweDB – Custom NoSQL Database",
+    description: "A non-relational DBMS storing data in JSON-like documents with SQL-style querying, blending schemaless flexibility with relational syntax.",
     tools: ["C#", "NoSQL", "Custom DBMS", "Json Storage", "SQL-Style Quering Engine"],
     tag: ["All", "Database","Software"],
     gitUrl: "https://github.com/Ahmad-17R/DBMS",
@@ -42,7 +42,7 @@ const projectsData = [
   {
     id: 5,
     title: "UET Campus Navigation System",
-    description: "A Windows Forms application that provides interactive, map-based navigation across the university campus, guiding users from source to destination using real map visuals.",
+    description: "A Windows Forms application that provides interactive, map-based navigation across the university campus using real map visuals.",
     tools: ["C#", "Winforms", "Campus Navigation", "Data Structures", "Map UI"],
     tag: ["All", "Software"],
     gitUrl: "https://github.com/Hannanm10/UET-Navigation-System",
@@ -50,31 +50,31 @@ const projectsData = [
   {
     id: 6,
     title: "Stadium Management System",
-    description: "A relational database project designed in SSMS to manage stadium operations, including seating, bookings, scheduling, and staff records through structured SQL schema and queries.",
+    description: "A relational database project in SSMS to manage stadium operations, including seating, bookings, scheduling, and staff records.",
     tools: ["SQL Server", "SSMS", "C#", "Winforms"],
     tag: ["All", "Software","Database"],
-    gitUrl: "https://github.com/your-username/your-repo",
+    gitUrl: "https://github.com/Furqan-10/Stadium-Management-System-1",
   },
   {
     id: 7,
     title: "Store Management System",
-    description: "A multi-layered C# application with a Project Library (Business & Data Layers), a WinForms-based frontend, and a Console App for Match entity CRUD — managing products via database and file handling.",
+    description: "A multi-layered C# application with a Project Library, a WinForms frontend, and a Console App for CRUD operations on products.",
     tools: ["C#", "Winforms", "Console App", "SQL"],
-    tag: ["All", "Sotfware"],
-    gitUrl: "https://github.com/your-username/your-repo",
+    tag: ["All", "Software"],
+    gitUrl: "https://github.com/Furqan-10/Store-Management-System",
   },
   {
     id: 8,
-    title: "Solitaire Game (Data Structures Based)",
-    description: "A CLI-based Solitaire game developed in C# using custom implementations of stacks, queues, and linked lists to manage cards and gameplay logic efficiently.",
-    tools: ["C#", "Data Structures", "Stack/Queue", "CLI based"],
-    tag: ["All"],
-    gitUrl: "https://github.com/your-username/your-repo",
+    title: "Solitaire Game (Data Structures)",
+    description: "A CLI-based Solitaire game developed in C# using custom implementations of stacks, queues, and linked lists to manage gameplay logic.",
+    tools: ["C#", "Data Structures", "Stack/Queue", "CLI"],
+    tag: ["All", "Software"],
+    gitUrl: "https://github.com/Furqan-10/Solitare-Game",
   },
   {
     id: 9,
     title: "AI-Based Fire Detection System",
-    description: "An IoT-integrated fire detection system combining sensor data, Arduino-ESP32 communication, and a cloud-hosted AI model on Hugging Face, with real-time alerts via MQTT and local actuation using GPIOs.",
+    description: "An IoT-integrated fire detection system combining sensor data, Arduino-ESP32 communication, and a cloud-hosted AI model.",
     tools: ["C", "Esp32", "Arduino", "UART","MQTT Mobile app","Hugging Face"],
     tag: ["All", "AI","Software"],
     gitUrl: "https://github.com/Furqan-10/AI-Based-Fire-Detection-System",
@@ -101,35 +101,16 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-12 px-4">
-      <h2 className="text-center text-4xl font-bold text-slate-900 dark:text-white mt-4 mb-8 md:mb-12">
+      <h2 className="text-center text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-4 mb-8 md:mb-12">
         My Projects
       </h2>
-      <div className="text-slate-900 dark:text-white flex flex-row justify-center items-center gap-2 py-6">
-        <ProjectTag
-          onClick={handleTagChange}
-          name="All"
-          isSelected={tag === "All"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Networking"
-          isSelected={tag === "Networking"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Web"
-          isSelected={tag === "Web"}
-        />
-                <ProjectTag
-          onClick={handleTagChange}
-          name="Software"
-          isSelected={tag === "Software"}
-        />
-                <ProjectTag
-          onClick={handleTagChange}
-          name="Database"
-          isSelected={tag === "Database"}
-        />
+      <div className="flex flex-row justify-start md:justify-center items-center gap-2 py-6 overflow-x-auto">
+        <ProjectTag onClick={handleTagChange} name="All" isSelected={tag === "All"} />
+        <ProjectTag onClick={handleTagChange} name="Web" isSelected={tag === "Web"} />
+        <ProjectTag onClick={handleTagChange} name="AI" isSelected={tag === "AI"} />
+        <ProjectTag onClick={handleTagChange} name="Software" isSelected={tag === "Software"} />
+        <ProjectTag onClick={handleTagChange} name="Database" isSelected={tag === "Database"} />
+        <ProjectTag onClick={handleTagChange} name="Networking" isSelected={tag === "Networking"} />
       </div>
       <ul ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
         {filteredProjects.map((project, index) => (
