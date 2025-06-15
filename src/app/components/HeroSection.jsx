@@ -39,7 +39,7 @@ const HeroSection = () => {
         >
           <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-8xl lg:leading-normal font-extrabold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I'm{" "}
+              Hello, I am{" "}
             </span>
             <br />
             {/* Animated Name */}
@@ -62,8 +62,8 @@ const HeroSection = () => {
             </motion.div>
           </h1>
 <p className="text-slate-600 dark:text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-  I’m a Computer Scientist and Developer passionate about turning complex problems into clean, efficient code.
-  Whether it's building intelligent systems or crafting seamless user experiences — I’m driven by impact, performance, and innovation.
+  I am a Computer Scientist and Developer passionate about turning complex problems into clean, efficient code.
+  Whether it is building intelligent systems or crafting seamless user experiences — I am driven by impact, performance, and innovation.
 </p>
           <div>
             <Link
