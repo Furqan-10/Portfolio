@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* In src/app/globals.css */
+
+/* --- ADD THIS CODE --- */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* In src/app/globals.css */
+
+.animated-gradient-border {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  /* CHANGE THIS LINE */
+  padding: 4px; /* Was 2px, now it's thicker */
+}
+
+/* (The ::before pseudo-element remains the same) */
+.animated-gradient-border::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #4909df;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  background-image: conic-gradient(
+    from 0deg,
+    var(--tw-color-primary-400),
+    var(--tw-color-secondary-600),
+    var(--tw-color-primary-400)
+  );
+  animation: rotate 4s linear infinite;
+}
