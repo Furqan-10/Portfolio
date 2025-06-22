@@ -1,28 +1,49 @@
-import { NextResponse } from "next/server";
-import { Resend } from "resend";
+// app/api/send/route.js
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const fromEmail = process.env.FROM_EMAIL;
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(req, res) {
   const { email, subject, message } = await req.json();
-  console.log(email, subject, message);
+
+  // Get the credentials from your environment variables
+  const user = process.env.GMAIL_EMAIL;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+
+  // Create a transporter object using the default SMTP transport with Gmail
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: user,
+      pass: pass,
+    },
+  });
+
+  // Set up the email data
+  const mailOptions = {
+    from: user, // This will be your Gmail address
+    to: user, // This is where you will receive the email (your own Gmail)
+    replyTo: email, // This is the user's email, so you can reply to them directly
+    subject: `Portfolio Contact: ${subject}`, // Prepend subject for clarity
+    // Create a prettier HTML body for the email
+    html: `
+      <h2>New Message from Your Portfolio Contact Form</h2>
+      <p><strong>From:</strong> ${email}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <hr />
+      <h3>Message:</h3>
+      <p>${message.replace(/\n/g, "<br>")}</p>
+    `,
+  };
+
   try {
-    const data = await resend.emails.send({
-      from: fromEmail,
-      to: [fromEmail, email],
-      subject: subject,
-      react: (
-        <>
-          <h1>{subject}</h1>
-          <p>Thank you for contacting us!</p>
-          <p>New message submitted:</p>
-          <p>{message}</p>
-        </>
-      ),
-    });
-    return NextResponse.json(data);
+    // Send the email
+    await transporter.sendMail(mailOptions);
+    // Return a success response
+    return NextResponse.json({ status: 200, message: "Email sent successfully" });
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error(error);
+    // Return an error response
+    return NextResponse.json({ status: 500, message: "Failed to send email" }, { status: 500 });
   }
 }
