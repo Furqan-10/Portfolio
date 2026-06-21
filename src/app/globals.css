@@ -2,70 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+:root { color-scheme: dark; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+html, body { background-color: #0a0a0a; }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #ECECEC;
+  overflow-x: hidden;
 }
 
-/* In src/app/globals.css */
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 
-/* --- ADD THIS CODE --- */
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-500;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  .glow-violet { box-shadow: 0 0 40px -10px rgba(139, 92, 246, 0.6); }
+  .glow-text { text-shadow: 0 0 28px rgba(139, 92, 246, 0.45); }
+  .panel { @apply bg-white/[0.03] border border-white/10 backdrop-blur-sm; }
 }
 
-/* In src/app/globals.css */
-
-.animated-gradient-border {
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-  /* CHANGE THIS LINE */
-  padding: 4px; /* Was 2px, now it's thicker */
-}
-
-/* (The ::before pseudo-element remains the same) */
-.animated-gradient-border::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-color: #4909df;
-  background-repeat: no-repeat;
-  background-size: 50% 50%, 50% 50%;
-  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-  background-image: conic-gradient(
-    from 0deg,
-    var(--tw-color-primary-400),
-    var(--tw-color-secondary-600),
-    var(--tw-color-primary-400)
-  );
-  animation: rotate 4s linear infinite;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
