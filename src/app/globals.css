@@ -25,6 +25,30 @@ html.lenis, html.lenis body { height: auto; }
   .panel { @apply bg-white/[0.03] border border-white/10 backdrop-blur-sm; }
 }
 
+/* Floating 3D project text (Work cards) */
+@keyframes text3dFloat {
+  0%   { transform: translateY(0) rotateY(-7deg) rotateX(3deg); }
+  50%  { transform: translateY(-7px) rotateY(7deg) rotateX(-2deg); }
+  100% { transform: translateY(0) rotateY(-7deg) rotateX(3deg); }
+}
+.text-3d-float { animation: text3dFloat 6.5s ease-in-out infinite; will-change: transform; }
+.text-3d {
+  color: #c4b5fd;
+  text-shadow:
+    1px 1px 0 #7c3aed,
+    2px 2px 0 #7c3aed,
+    3px 3px 0 #6d28d9,
+    4px 4px 0 #6d28d9,
+    5px 5px 0 #5b21b6,
+    6px 6px 0 #5b21b6,
+    7px 8px 14px rgba(0, 0, 0, 0.55),
+    0 0 26px rgba(139, 92, 246, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-3d-float { animation: none !important; transform: rotateY(-6deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }

@@ -5,19 +5,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowUpRight } from "react-icons/fi";
 import { projects } from "../data/projects";
 import { useIsMobile } from "../hooks/useIsMobile";
+import Project3DText from "./Project3DText";
 
 function Card({ p }) {
   return (
     <a href={p.url} target="_blank" rel="noopener noreferrer"
-       className="group panel flex h-[60vh] w-[85vw] shrink-0 flex-col justify-between rounded-3xl p-8 transition hover:border-primary-400/40 md:w-[40vw]">
-      <div className="flex items-start justify-between">
-        <span className="text-5xl font-extrabold text-white/10">{p.n}</span>
-        <FiArrowUpRight className="text-white/40 transition group-hover:text-primary-400" size={26} />
+       className="group panel flex h-[60vh] w-[85vw] shrink-0 flex-col overflow-hidden rounded-3xl transition hover:border-primary-400/40 md:w-[40vw]">
+      {/* 3D floating project label */}
+      <div className="relative flex-1 overflow-hidden border-b border-white/10 bg-gradient-to-br from-primary-500/[0.08] via-transparent to-secondary-500/[0.06]">
+        <span className="pointer-events-none absolute left-6 top-4 text-6xl font-extrabold text-white/[0.06]">{p.n}</span>
+        <FiArrowUpRight className="pointer-events-none absolute right-6 top-6 text-white/40 transition group-hover:text-primary-400" size={26} />
+        <Project3DText text={p.short} />
       </div>
-      <div>
+      {/* details */}
+      <div className="p-7">
         <p className="mb-2 text-xs font-bold uppercase tracking-widest text-secondary-400">{p.category}</p>
         <h3 className="mb-3 text-2xl font-bold text-white">{p.title}</h3>
-        <p className="mb-5 text-sm leading-relaxed text-white/60">{p.desc}</p>
+        <p className="mb-5 text-sm leading-relaxed text-white/60 line-clamp-2">{p.desc}</p>
         <div className="flex flex-wrap gap-2">
           {p.tools.map((t) => (
             <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">{t}</span>
