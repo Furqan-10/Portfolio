@@ -20,6 +20,7 @@ export default function SmoothScrollProvider({ children }) {
       ScrollTrigger.update();
       const max = document.documentElement.scrollHeight - window.innerHeight;
       scrollStore.progress = max > 0 ? window.scrollY / max : 0;
+      scrollStore.heroProgress = Math.min(1, window.scrollY / window.innerHeight);
       scrollStore.velocity = lenis.velocity || 0;
     });
 

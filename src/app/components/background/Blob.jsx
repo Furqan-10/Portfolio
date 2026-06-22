@@ -4,6 +4,11 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { scrollStore } from "../scroll/scrollStore";
 
+const smoothstep = (e0, e1, x) => {
+  const t = Math.min(1, Math.max(0, (x - e0) / (e1 - e0)));
+  return t * t * (3 - 2 * t);
+};
+
 const vertex = `
   uniform float uTime; uniform float uScroll; uniform vec2 uMouse;
   varying float vDisp; varying vec3 vNormal;
@@ -45,13 +50,13 @@ const vertex = `
 
 const fragment = `
   varying float vDisp; varying vec3 vNormal;
-  uniform float uScroll;
+  uniform float uScroll; uniform float uOpacity;
   void main(){
     vec3 violet=vec3(0.545,0.361,0.965);
     vec3 magenta=vec3(0.925,0.282,0.6);
     vec3 col=mix(violet,magenta,smoothstep(-0.5,1.0,vDisp)+uScroll*0.3);
     float fres=pow(1.0-abs(dot(normalize(vNormal),vec3(0.,0.,1.))),2.0);
-    gl_FragColor=vec4(col + fres*0.6, 0.9);
+    gl_FragColor=vec4(col + fres*0.6, 0.9 * uOpacity);
   }
 `;
 
@@ -60,6 +65,7 @@ export default function Blob() {
   const mat = useRef();
   const uniforms = useMemo(() => ({
     uTime: { value: 0 }, uScroll: { value: 0 }, uMouse: { value: new THREE.Vector2() },
+    uOpacity: { value: 1 },
   }), []);
 
   useFrame((_, delta) => {
@@ -69,12 +75,19 @@ export default function Blob() {
     u.uScroll.value += (scrollStore.progress - u.uScroll.value) * 0.06;
     u.uMouse.value.x += (scrollStore.mouseX - u.uMouse.value.x) * 0.04;
     u.uMouse.value.y += (scrollStore.mouseY - u.uMouse.value.y) * 0.04;
+
+    // Hero-only: fade + drift away as the first viewport scrolls past, then hide.
+    const hp = scrollStore.heroProgress;
+    const fade = 1 - smoothstep(0.05, 0.55, hp);
+    u.uOpacity.value += (fade - u.uOpacity.value) * 0.12;
+    mesh.current.visible = u.uOpacity.value > 0.01;
+
     mesh.current.rotation.y += delta * 0.15;
     mesh.current.rotation.x = scrollStore.mouseY * 0.3;
-    // drift right + shrink as user scrolls past hero
-    mesh.current.position.x = 1.6 + scrollStore.progress * 1.5;
-    const s = 1.3 - scrollStore.progress * 0.4;
-    mesh.current.scale.setScalar(s);
+    // drift right + up and shrink as the hero leaves
+    mesh.current.position.x = 1.6 + hp * 1.8;
+    mesh.current.position.y = hp * 1.2;
+    mesh.current.scale.setScalar(1.3 - hp * 0.5);
   });
 
   return (

@@ -1,8 +1,9 @@
 export const scrollStore = {
-  progress: 0,   // 0..1 over full page
+  progress: 0,     // 0..1 over full page
+  heroProgress: 0, // 0..1 over the first viewport (hero) only
   velocity: 0,
-  mouseX: 0,     // -1..1
-  mouseY: 0,     // -1..1
+  mouseX: 0,       // -1..1
+  mouseY: 0,       // -1..1
 };
 
 if (typeof window !== "undefined") {
