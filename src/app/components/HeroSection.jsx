@@ -1,105 +1,48 @@
-// HeroSection.jsx
-
 "use client";
-import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { TypeAnimation } from "react-type-animation";
 
-const HeroSection = () => {
-  const name = "Furqan Asif";
+const name = "Furqan Asif";
+const container = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
+const letter = { hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1 } };
 
-  // ... (Framer Motion variants remain the same) ...
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-  };
-  const letterVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-  };
-
+export default function HeroSection() {
   return (
-    <section className="py-12 sm:py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-12">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
-        >
-          {/* ... (h1 and p tags remain the same) ... */}
-          <h1 className="text-slate-900 dark:text-white mb-4 text-4xl sm:text-5xl lg:text-7xl xl:text-8xl lg:leading-normal font-extrabold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I am{" "}
-            </span>
-            <br />
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              aria-label={name}
-              className="inline-block"
-            >
-              {name.split("").map((char, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  className="inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </motion.div>
-          </h1>
-          <p className="text-slate-600 dark:text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            I am a Computer Scientist and Developer passionate about turning complex problems into clean, efficient code.
-            Whether it is building intelligent systems or crafting seamless user experiences — I am driven by impact, performance, and innovation.
-          </p>
-          <div>
-            <Link
-              href="/#contact"
-              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-primary-600 text-white"
-            >
-              Hire Me
-            </Link>
-            
-            {/* --- THIS IS THE UPDATED LINK --- */}
-            <Link
-              href="/Furqan-Asif-CV.pdf" // The path to your CV in the public folder
-              download="Furqan-Asif-CV.pdf" // This attribute triggers the download
-              target="_blank" // Opens the download link in a new tab
-              rel="noopener noreferrer" // Security best practice for target="_blank"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
-            >
-              <span className="block bg-slate-100 hover:bg-slate-200 dark:bg-[#121212] dark:hover:bg-slate-800 rounded-full px-5 py-2 text-slate-900 dark:text-white">
-                Download CV
-              </span>
-            </Link>
-          </div>
-        </motion.div>
-        
-        {/* ... (The image div remains the same) ... */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-4 place-self-center mt-8 lg:mt-0"
-        >
-          <div className="rounded-full animated-gradient-border w-[250px] h-[250px] lg:w-[400px] lg:h-[400px]">
-            <div className="w-full h-full bg-slate-200 dark:bg-[#181818] rounded-full relative overflow-hidden border-2 border-slate-300 dark:border-[#27272A]">
-                <Image
-                  src="/images/hero-image.jpg"
-                  alt="hero image"
-                  className="object-cover"
-                  fill={true}
-                />
-            </div>
-          </div>
+    <section id="top" className="relative flex min-h-screen flex-col justify-center px-6 sm:px-10">
+      <div className="max-w-3xl">
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-primary-400">Hello, I am</motion.p>
+
+        <motion.h1 variants={container} initial="hidden" animate="visible"
+          className="text-5xl font-extrabold leading-tight sm:text-7xl lg:text-8xl">
+          {name.split("").map((c, i) => (
+            <motion.span key={i} variants={letter} className="inline-block text-gradient">
+              {c === " " ? " " : c}
+            </motion.span>
+          ))}
+        </motion.h1>
+
+        <div className="mt-5 text-2xl font-semibold text-white/80 sm:text-3xl">
+          <TypeAnimation
+            sequence={["Computer Scientist", 1600, "AI Engineer", 1600, "Full-Stack Developer", 1600, "Cybersecurity Enthusiast", 1600, "Mobile App Developer", 1600]}
+            wrapper="span" speed={45} repeat={Infinity} />
+        </div>
+
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+          className="mt-6 max-w-xl text-base text-white/60 sm:text-lg">
+          I turn complex problems into clean, efficient code — building intelligent systems, secure
+          networks, and seamless web &amp; mobile experiences. CS &apos;27 @ UET Lahore.
+        </motion.p>
+
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
+          className="mt-8 flex flex-wrap gap-4">
+          <a href="#contact" className="rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 px-7 py-3 font-semibold text-white transition hover:opacity-90 glow-violet">Hire Me</a>
+          <a href="/Furqan-Asif-CV.pdf" download target="_blank" rel="noopener noreferrer"
+             className="rounded-full border border-white/20 px-7 py-3 font-semibold text-white/90 transition hover:bg-white/10">Download CV</a>
         </motion.div>
       </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-white/40 animate-floaty">Scroll ↓</div>
     </section>
   );
-};
-
-export default HeroSection;
+}

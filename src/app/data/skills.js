@@ -1,14 +1,14 @@
 import {
-  SiPython, SiJavascript, SiCplusplus, SiSharp, SiC, SiKotlin, SiHtml5, SiCss3,
+  SiPython, SiJavascript, SiCplusplus, SiSharp, SiC, SiKotlin, SiHtml5,
   SiReact, SiNextdotjs, SiNodedotjs, SiTailwindcss, SiTensorflow, SiPytorch,
-  SiOpencv, SiMysql, SiGit, SiGithub, SiAndroid, SiVercel,
+  SiOpencv, SiMysql, SiGit, SiGithub, SiAndroid, SiVercel, SiCss,
 } from "react-icons/si";
 
 export const skills = [
   { name: "Python", icon: SiPython }, { name: "JavaScript", icon: SiJavascript },
   { name: "C++", icon: SiCplusplus }, { name: "C#", icon: SiSharp },
   { name: "C", icon: SiC }, { name: "Kotlin", icon: SiKotlin },
-  { name: "HTML", icon: SiHtml5 }, { name: "CSS", icon: SiCss3 },
+  { name: "HTML", icon: SiHtml5 }, { name: "CSS", icon: SiCss },
   { name: "React", icon: SiReact }, { name: "Next.js", icon: SiNextdotjs },
   { name: "Node.js", icon: SiNodedotjs }, { name: "Tailwind", icon: SiTailwindcss },
   { name: "TensorFlow", icon: SiTensorflow }, { name: "PyTorch", icon: SiPytorch },

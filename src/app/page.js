@@ -1,20 +1,30 @@
+import Loader from "./components/Loader";
+import TopBar from "./components/chrome/TopBar";
+import SideSocials from "./components/chrome/SideSocials";
+import ResumeCorner from "./components/chrome/ResumeCorner";
 import HeroSection from "./components/HeroSection";
-import Navbar from "./components/Navbar";
 import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
+import WhatIDoSection from "./components/WhatIDoSection";
+import TimelineSection from "./components/TimelineSection";
+import WorkSection from "./components/WorkSection";
+import TechStackSection from "./components/TechStackSection";
 import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#121212]">
-      <Navbar />
-      <div className="container mt-24 mx-auto px-12 py-4">
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <EmailSection />
-      </div>
+    <main className="relative">
+      <Loader />
+      <TopBar />
+      <SideSocials />
+      <ResumeCorner />
+      <HeroSection />
+      <AboutSection />
+      <WhatIDoSection />
+      <TimelineSection />
+      <WorkSection />
+      <TechStackSection />
+      <EmailSection />
       <Footer />
     </main>
   );
