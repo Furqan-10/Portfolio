@@ -79,7 +79,7 @@ export default function Blob() {
 
   return (
     <mesh ref={mesh} position={[1.6, 0, 0]}>
-      <icosahedronGeometry args={[1, 64]} />
+      <icosahedronGeometry args={[1, 24]} />
       <shaderMaterial ref={mat} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent />
     </mesh>
   );
