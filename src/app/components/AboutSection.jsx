@@ -15,7 +15,7 @@ export default function AboutSection() {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
           className="md:col-span-2">
           <div className="relative mx-auto aspect-square w-64 overflow-hidden rounded-2xl border border-white/10 glow-violet sm:w-72">
-            <Image src="/images/hero-image.jpg" alt="Furqan Asif" fill sizes="(max-width: 768px) 16rem, 18rem" className="object-cover" />
+            <Image src="/images/hero-image.jpeg" alt="Furqan Asif" fill sizes="(max-width: 768px) 16rem, 18rem" className="object-cover" />
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
